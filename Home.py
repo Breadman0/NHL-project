@@ -61,7 +61,7 @@ with center:
     st.markdown('<h1 style="text-align: center; padding-top: 30px; font-family: \'CanterburyFont\', serif; font-size: 4rem;">The Tribune</h1>', unsafe_allow_html=True)
     r,c,l,m,n = st.columns([4,4,4,5,4])
     with l:
-        st.image(r"C:\Users\pytho\Documents\nhl\project\images\NHL-Logo.png",width=200)
+        st.image(r"C:\Users\pytho\Documents\nhl\project\images\nhl_logo.png",width=200)
 with left:
     st.markdown('<h3 style="font-family:\'basker-bold\',serif;">&emsp;LATE CITY&emsp;&ensp;EDITION</h3><p>FIVE CENTS In Manhattan,<br>Brooklyn and The Bronx <br>| TEN CENTS Elsewhere</p>',unsafe_allow_html=True)
 with right:
@@ -70,7 +70,7 @@ with right:
 cols = st.columns(41)
 for i in range(41):
     with cols[i]:
-        img_path = rf"C:\Users\pytho\Documents\nhl\project\images\NHL Logos\image{i + 1}.png"
+        img_path = rf"C:\Users\pytho\Documents\nhl\project\images\NHL Logos\image ({i + 1}).png"
         st.image(img_path,width=80)
     
 st.markdown('<hr>',unsafe_allow_html=True)    
@@ -81,9 +81,9 @@ with c1:
 with l1:
     r2,c2,l2 = st.columns([6,6,5])
     with l2:
-        st.image(r"C:\Users\pytho\Documents\nhl\project\images\image.png",width=100)
+        st.image(r"C:\Users\pytho\Documents\nhl\project\images\canon2.png",width=100)
 with r1:
-    st.image(r"C:\Users\pytho\Documents\nhl\project\images\canon.png",width = 100)
+    st.image(r"C:\Users\pytho\Documents\nhl\project\images\canon1.png",width = 100)
 st.markdown('<h6 style="text-align: center; padding-top: 10px;">Vol. I • June 2026</h6>', unsafe_allow_html=True)
 
 
