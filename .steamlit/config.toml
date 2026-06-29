@@ -1,0 +1,12 @@
+[server]
+enableStaticServing = true
+
+[[theme.fontFaces]]
+family = "Monocraft"
+url = "/app/static/Monocraft.ttf"
+style = "normal"
+weight = "normal"
+
+[theme]
+font = "Monocraft"
+backgroundColor = '#F5F1E8'
