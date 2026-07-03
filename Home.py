@@ -1,5 +1,12 @@
 import streamlit as st
+import os
 
+
+path = r"C:\Users\pytho\Documents\nhl\project\data\bankroll.txt"
+if not os.path.exists(path):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w") as f:
+        f.write("1000.0")
 
 st.set_page_config(
 
@@ -103,4 +110,10 @@ with sidebar:
     st.write("Hertl breaks tie late, Golden Knights edge Hurricanes in Game 1 of Cup Final")
     st.image(r"C:\Users\pytho\Documents\nhl\project\images\n3.png")
     st.write("Hurricanes win Stanley Cup with Game 6 shutout against Golden Knights")
-
+if 'bankroll' not in st.session_state:
+    with open(path,"r") as w:
+        st.session_state.bankroll = float(w.read().strip())
+    
+with st.sidebar:
+    st.title("Current Bankroll")
+    st.metric(label="Current money",value=f"${st.session_state.bankroll:,.2f}")
