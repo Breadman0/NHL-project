@@ -17,6 +17,7 @@ font_path ="static\Monocraft.ttf"
 fm.fontManager.addfont(font_path)
 font_name = fm.FontProperties(fname=font_path).get_name()
 plt.rcParams['font.family'] = font_name
+plt.rcParams['axes.unicode_minus'] = False
 ##WIN loss calc:
 connection = sqlite3.connect('data/bets.db')
 conn = connection.cursor()
@@ -142,8 +143,10 @@ with main:
         with open(path2,"r") as r:
             lines = r.read().splitlines()
             lines = [float(val) for val in lines if val]
-        y_vals = list(range(1,len(lines)+1))
-        ax.plot(y_vals,lines,'-o',color='green',linewidth=2)
+        
+            
+        x_vals = list(range(1,len(lines)+1))
+        ax.plot(x_vals,lines,'-o',color='green',linewidth=2)
         ax.grid(True)
         ax.set_title("Bankroll History")
         st.pyplot(fig)
@@ -168,6 +171,41 @@ with main:
         ax1.set_title("Win-Loss Ratio")
         ax1.axis('equal')
         st.pyplot(fig1)
+        ##
+        lines_np = np.array(lines)
+        profit_np = np.diff(lines_np)
+        cum_sum = np.cumsum(profit_np)
+        roi = (cum_sum/1000)*100
+        fig2,ax2 = plt.subplots()
+        fig2.patch.set_color('#F5F1E8')
+        ax2.set_facecolor('#F5F1E8')
+        ax2.plot(x_vals[:-1],roi,'-o',linewidth=2)
+        ax2.axhline(0, color='green', linestyle='--', linewidth=1.5, alpha=0.7)
+        ax2.grid(2)
+        ax2.set_title("ROI Chart")
+        st.pyplot(fig2)
+        
+        profit_net = np.sum(profit_np[profit_np>0])
+        loss_net = np.sum(profit_np[profit_np<0])
+        net = profit_net+loss_net
+        colo = ""
+        if net > 0:
+            colo = "green"
+        elif net == 0:
+            colo ="grey"
+        else:
+            colo ="red"
+        p,n,l = st.columns([2,2,2])
+        with p:
+            st.markdown("<h4 style='text-align:center;'>PROFIT:</h4>",unsafe_allow_html=True)
+            st.markdown(f"<h5 style='color:green;text-align:center;'>{profit_net:.2f}$</h5>",unsafe_allow_html=True)
+            
+        with n:
+            st.markdown("<h4 style='text-align:center;'>NET:</h4>",unsafe_allow_html=True)
+            st.markdown(f"<h5 style='color:{colo};text-align:center;'>{net:.2f}$</h5>",unsafe_allow_html=True)
+        with l:
+            st.markdown("<h4 style='text-align:center;'>LOSS:</h4>",unsafe_allow_html=True)
+            st.markdown(f"<h5 style='color:red;text-align:center;'>{loss_net:.2f}$</h5>",unsafe_allow_html=True)
 
 with sidebar:
     with st.container(height=1000):
