@@ -19,7 +19,7 @@ font_name = fm.FontProperties(fname=font_path).get_name()
 plt.rcParams['font.family'] = font_name
 plt.rcParams['axes.unicode_minus'] = False
 ##WIN loss calc:
-connection = sqlite3.connect('data/bets.db')
+connection = sqlite3.connect('data\bets.db')
 conn = connection.cursor()
 bet_q = """ SELECT team_bet_on , winner
             FROM BETS
