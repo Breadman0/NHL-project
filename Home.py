@@ -13,7 +13,7 @@ st.set_page_config(
     layout="wide"
 
 )
-font_path ="static\Monocraft.ttf" 
+font_path ="static/Monocraft.ttf" 
 fm.fontManager.addfont(font_path)
 font_name = fm.FontProperties(fname=font_path).get_name()
 plt.rcParams['font.family'] = font_name
