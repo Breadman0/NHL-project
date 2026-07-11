@@ -5,6 +5,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import sqlite3
 import matplotlib.font_manager as fm
+import sys
+
 
 st.set_page_config(
 
@@ -13,13 +15,16 @@ st.set_page_config(
     layout="wide"
 
 )
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
 font_path ="static/Monocraft.ttf" 
 fm.fontManager.addfont(font_path)
 font_name = fm.FontProperties(fname=font_path).get_name()
 plt.rcParams['font.family'] = font_name
 plt.rcParams['axes.unicode_minus'] = False
 ##WIN loss calc:
-connection = sqlite3.connect('data\bets.db')
+connection = sqlite3.connect('data/bets.db')
 conn = connection.cursor()
 bet_q = """ SELECT team_bet_on , winner
             FROM BETS
@@ -44,7 +49,7 @@ for idx,row in enumerate(parlay_df.itertuples()):
     else:
         lost +=1
 ##############################
-path = r"data\bankroll.txt"
+path = r"data/bankroll.txt"
 if not os.path.exists(path):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w") as f:
