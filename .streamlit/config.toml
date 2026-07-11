@@ -3,7 +3,7 @@ enableStaticServing = true
 
 [[theme.fontFaces]]
 family = "Monocraft"
-url = "/app/static/Monocraft.ttf"
+url = "/static/Monocraft.ttf"
 style = "normal"
 weight = "normal"
 
