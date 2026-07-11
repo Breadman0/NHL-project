@@ -4,7 +4,8 @@ import numpy as np
 import pandas as pd
 import sqlite3
 import streamlit as st
-
+from utils.styling import inject_custom_css
+inject_custom_css()
 st.set_page_config(page_title="Parlay Tab", layout="wide")
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
@@ -17,29 +18,7 @@ bets_db_path = DATA_DIR / "bets.db"
 bankroll_path = DATA_DIR / "bankroll.txt"
 log_roll_path = DATA_DIR / "log_roll.txt"
 
-st.markdown(
-    """
-    <style>
-    @font-face {
-        font-family: 'Monocraft';
-        src: url('/app/static/Monocraft.ttf') format('truetype');
-        font-display: swap;
-    }
-    @font-face {
-        font-family: 'Material Symbols';
-        src: url('/app/static/MaterialSymbols-Regular.ttf') format('truetype');
-        font-display: swap;
-    }
-    body, html, .stApp, .main, .block-container, .element-container {
-        font-family: 'Segoe UI', Roboto, Arial, sans-serif !important;
-        line-height: 1.4 !important;
-    }
-    .stApp *:not([class*="material-symbol"]):not([data-testid*="Icon"]):not([data-testid*="icon"]):not([data-baseweb="icon"]):not(svg):not(svg *) {
-        font-family: 'Monocraft', 'Courier New', monospace !important;
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
+
 
 st.markdown('<div class="monocraft-app">', unsafe_allow_html=True)
 
