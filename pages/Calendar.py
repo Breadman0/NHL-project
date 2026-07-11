@@ -29,11 +29,8 @@ st.markdown(
         font-family: 'Segoe UI', Roboto, Arial, sans-serif !important;
         line-height: 1.4 !important;
     }
-    .stApp, .stApp *:not(.material-icons):not([class*="material-symbol"]):not([data-testid="stIcon"]) {
+    .stApp *:not([class*="material-symbol"]):not([data-testid*="Icon"]):not([data-testid*="icon"]):not([data-baseweb="icon"]):not(svg):not(svg *) {
         font-family: 'Monocraft', 'Courier New', monospace !important;
-    }
-    .material-icons, [class*="material-symbol"], [data-testid="stIcon"] {
-        font-family: 'Material Symbols', 'Segoe UI Symbol', sans-serif !important;
     }
     </style>
     """,
