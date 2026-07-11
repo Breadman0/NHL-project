@@ -16,19 +16,19 @@ st.markdown(
     <style>
     @font-face {
         font-family: 'Monocraft';
-        src: url('/static/Monocraft.ttf') format('truetype');
+        src: url('/app/static/Monocraft.ttf') format('truetype');
         font-display: swap;
     }
     @font-face {
         font-family: 'Material Symbols';
-        src: url('/static/MaterialSymbols-Regular.ttf') format('truetype');
+        src: url('/app/static/MaterialSymbols-Regular.ttf') format('truetype');
         font-display: swap;
     }
     body, html, .stApp, .main, .block-container, .element-container {
         font-family: 'Segoe UI', Roboto, Arial, sans-serif !important;
         line-height: 1.4 !important;
     }
-    .monocraft-app, .monocraft-app *:not(.material-icons):not([class*="material-symbol"]):not([data-testid="stIcon"]) {
+    .stApp, .stApp *:not(.material-icons):not([class*="material-symbol"]):not([data-testid="stIcon"]) {
         font-family: 'Monocraft', 'Courier New', monospace !important;
     }
     .material-icons, [class*="material-symbol"], [data-testid="stIcon"] {

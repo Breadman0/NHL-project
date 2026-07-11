@@ -39,19 +39,19 @@ st.markdown(
     <style>
     @font-face {
         font-family: 'Monocraft';
-        src: url('/static/Monocraft.ttf') format('truetype');
+        src: url('/app/static/Monocraft.ttf') format('truetype');
         font-display: swap;
     }
     @font-face {
         font-family: 'Material Symbols';
-        src: url('/static/MaterialSymbols-Regular.ttf') format('truetype');
+        src: url('/app/static/MaterialSymbols-Regular.ttf') format('truetype');
         font-display: swap;
     }
     body, html, .stApp, .main, .block-container, .element-container {
         font-family: 'Segoe UI', Roboto, Arial, sans-serif !important;
         line-height: 1.4 !important;
     }
-    .monocraft-app, .monocraft-app *:not(.material-icons):not([class*="material-symbol"]):not([data-testid="stIcon"]) {
+    .stApp, .stApp *:not(.material-icons):not([class*="material-symbol"]):not([data-testid="stIcon"]) {
         font-family: 'Monocraft', 'Courier New', monospace !important;
     }
     .material-icons, [class*="material-symbol"], [data-testid="stIcon"] {
@@ -158,47 +158,64 @@ main, sidebar = st.columns([7, 3],border=True)
 
 with main:
     with st.container(height=1000):
+        bg = "#F5F1E8"
+        accent = "#7C5B3B"
+        accent_secondary = "#B78C53"
+        accent_tertiary = "#C47A4A"
+        grid_color = "#D7C6A8"
+        text_color = "#4F3E2A"
+
         fig, ax = plt.subplots()
         with log_roll_path.open("r", encoding="utf-8") as r:
             lines = r.read().splitlines()
             lines = [float(val) for val in lines if val]
-        
-            
-        x_vals = list(range(1,len(lines)+1))
-        ax.plot(x_vals,lines,'-o',color='green',linewidth=2)
-        ax.grid(True)
-        ax.set_title("Bankroll History")
+
+        x_vals = list(range(1, len(lines) + 1))
+        fig.patch.set_facecolor(bg)
+        ax.set_facecolor(bg)
+        ax.plot(x_vals, lines, '-o', color=accent, linewidth=2.2, markersize=4)
+        ax.grid(True, color=grid_color, alpha=0.8)
+        ax.set_title("Bankroll History", color=text_color)
+        ax.tick_params(colors=text_color)
+        for spine in ax.spines.values():
+            spine.set_color(grid_color)
         st.pyplot(fig)
-            
-        fig1,ax1 = plt.subplots()
-        
-        labels = ['Won','Lost']
-        sizes = [won,lost]
-        explode = [0.1,0]
-        colors = ['#1f77b4', '#ff7f0e']
-        plt.pie(
+
+        fig1, ax1 = plt.subplots()
+        labels = ['Won', 'Lost']
+        sizes = [won, lost]
+        explode = [0.1, 0]
+        colors = [accent, accent_secondary]
+        fig1.patch.set_facecolor(bg)
+        ax1.set_facecolor(bg)
+        ax1.pie(
             sizes,
             explode=explode,
             labels=labels,
             colors=colors,
             autopct='%1.1f%%',
             shadow=True,
-            startangle=140
+            startangle=140,
+            textprops={'color': text_color}
         )
-        ax1.set_title("Win-Loss Ratio")
+        ax1.set_title("Win-Loss Ratio", color=text_color)
         ax1.axis('equal')
         st.pyplot(fig1)
-        ##
+        
         lines_np = np.array(lines)
         profit_np = np.diff(lines_np)
         cum_sum = np.cumsum(profit_np)
-        roi = (cum_sum/1000)*100
-        fig2,ax2 = plt.subplots()
-        
-        ax2.plot(x_vals[:-1],roi,'-o',linewidth=2)
-        ax2.axhline(0, color='green', linestyle='--', linewidth=1.5, alpha=0.7)
-        ax2.grid(2)
-        ax2.set_title("ROI Chart")
+        roi = (cum_sum / 1000) * 100
+        fig2, ax2 = plt.subplots()
+        fig2.patch.set_facecolor(bg)
+        ax2.set_facecolor(bg)
+        ax2.plot(x_vals[:-1], roi, '-o', linewidth=2.2, color=accent_secondary, markersize=4)
+        ax2.axhline(0, color=accent_tertiary, linestyle='--', linewidth=1.5, alpha=0.8)
+        ax2.grid(2, color=grid_color, alpha=0.8)
+        ax2.set_title("ROI Chart", color=text_color)
+        ax2.tick_params(colors=text_color)
+        for spine in ax2.spines.values():
+            spine.set_color(grid_color)
         st.pyplot(fig2)
         
         profit_net = np.sum(profit_np[profit_np>0])
