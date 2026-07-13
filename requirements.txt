@@ -4,8 +4,5 @@ numpy
 matplotlib
 plotly
 sqlite-utils
-os 
-random
-datetime
 jinja2
 weasyprint
