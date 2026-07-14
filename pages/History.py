@@ -60,7 +60,7 @@ if not bets_df.empty:
                 st.markdown(f"Choice: {row.team_bet_on}")
                 st.markdown(f"Winner: {row.winner}")
             with c2:
-                st.markdown(f"Total Payout: {row.payout}$")
+                st.markdown(f"Total Payout: {row.payout}$"if row.winner == row.team_bet_on else "0$")
                 if st.button("Generate Betting Slip",key=f"bet_{row.winner}_{row.Index}"):
                     pages_dir = os.path.dirname(os.path.abspath(__file__))
                     env = Environment(loader=FileSystemLoader(pages_dir))
